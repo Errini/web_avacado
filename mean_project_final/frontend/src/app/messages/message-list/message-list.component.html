@@ -1,0 +1,23 @@
+<div class="col-md-8 col-md-offset-2">
+    <article class="panel panel-default" *ngFor="let message of filteredMessages"> <!-- Use filteredMessages -->
+        <div class="panel-body">
+            {{ message.content }}
+        </div>
+        <footer class="panel-footer">
+            <div class="author">
+                <img 
+                    *ngIf="message.user?.imagePath" 
+                    [src]="message.user?.imagePath" 
+                    [alt]="message.user?.username || 'User Image'" 
+                    class="user-image img-circle" 
+                    style="width: 30px; height: 30px; margin-right: 5px;">
+                {{ message.user?.username || 'Autor Desconhecido' }} <!-- Display username -->
+            </div>
+            <div class="config">
+                <a href="#" (click)="onEdit(message); $event.preventDefault()">Editar</a>
+                <a href="#" (click)="onDelete(message); $event.preventDefault()">Excluir</a>
+            </div>
+        </footer>
+    </article>
+</div>
+
