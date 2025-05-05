@@ -1,0 +1,26 @@
+<div class="row">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="content">Conteúdo</label>
+        <input
+            type="text"
+            id="content"
+            class="form-control"
+            [ngModel]="messageToEdit?.content" 
+            name="content"
+            required
+            #contentInput="ngModel">
+      </div>
+      <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!f.valid">{{ messageToEdit ? 'Salvar' : 'Enviar' }}</button>
+      <button
+          class="btn btn-danger"
+          type="button"
+          (click)="onClear(f)">Limpar</button>
+    </div>
+  </form>
+</div>
+

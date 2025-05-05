@@ -1,0 +1,67 @@
+<div class="col-md-8 col-md-offset-2">
+    <h2>Cadastro de Usuário</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="username">Nome de Usuário</label>
+            <input
+                type="text"
+                id="username"
+                class="form-control"
+                formControlName="username">
+            <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+                 class="alert alert-danger">
+                Nome de usuário é obrigatório.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email">
+             <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                 class="alert alert-danger">
+                <span *ngIf="signupForm.get('email')?.errors?.['required']">Email é obrigatório.</span>
+                <span *ngIf="signupForm.get('email')?.errors?.['email']">Por favor, insira um email válido.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password">
+            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                 class="alert alert-danger">
+                Senha é obrigatória.
+            </div>
+        </div>
+        <!-- Image Upload -->
+        <div class="form-group">
+            <label for="image">Imagem de Perfil</label>
+            <div>
+                <button type="button" class="btn btn-secondary" (click)="filePicker.click()">Escolher Imagem</button>
+                <input type="file" #filePicker (change)="onImagePicked($event)" style="display: none;">
+            </div>
+            <div class="image-preview" *ngIf="imagePreview && signupForm.get('image')?.valid">
+                <img [src]="imagePreview" [alt]="signupForm.value.username" class="img-responsive">
+            </div>
+            <div *ngIf="signupForm.get('image')?.invalid && signupForm.get('image')?.touched"
+                 class="alert alert-danger">
+                 <span *ngIf="signupForm.get('image')?.errors?.['required']">Imagem é obrigatória.</span>
+                 <span *ngIf="signupForm.get('image')?.errors?.['invalidMimeType']">Tipo de arquivo inválido. Use PNG ou JPG.</span>
+            </div>
+        </div>
+        <!-- /Image Upload -->
+        <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!signupForm.valid">Cadastrar</button>
+    </form>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+    </div>
+</div>
+

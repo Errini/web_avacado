@@ -1,0 +1,49 @@
+<div class="panel panel-info">
+    <div class="panel-heading">Filtrar Mensagens</div>
+    <div class="panel-body">
+        <form (ngSubmit)="applyFilters()" #filterForm="ngForm">
+            <div class="row">
+                <!-- Combobox (Select) for User -->
+                <div class="col-sm-4 form-group">
+                    <label for="userFilter">Usuário:</label>
+                    <select id="userFilter" class="form-control" [(ngModel)]="filterCriteria.userId" name="userFilter">
+                        <option [ngValue]="null">Todos</option>
+                        <option *ngFor="let user of users" [value]="user._id">{{ user.username }}</option>
+                    </select>
+                </div>
+
+                <!-- Radio Buttons for Date Range -->
+                <div class="col-sm-4 form-group">
+                    <label>Período:</label>
+                    <div class="radio">
+                        <label><input type="radio" name="dateRange" [(ngModel)]="filterCriteria.dateRange" value="all"> Todos</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dateRange" [(ngModel)]="filterCriteria.dateRange" value="today"> Hoje</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="dateRange" [(ngModel)]="filterCriteria.dateRange" value="week"> Última Semana</label>
+                    </div>
+                </div>
+
+                <!-- Checkbox for Own Messages -->
+                <div class="col-sm-4 form-group">
+                    <div class="checkbox" style="margin-top: 25px;"> <!-- Adjust margin for alignment -->
+                        <label>
+                            <input type="checkbox" name="onlyMyMessages" [(ngModel)]="filterCriteria.onlyMyMessages">
+                            Apenas minhas mensagens
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                    <button type="button" class="btn btn-default" (click)="resetFilters()">Limpar Filtros</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

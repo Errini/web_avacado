@@ -1,0 +1,22 @@
+<div class="row">
+    <app-message-input 
+        [messageToEdit]="messageBeingEdited" 
+        (messageSaved)="handleMessageSaved($event)"
+        (editCancelled)="handleEditCancelled()">
+    </app-message-input>
+</div>
+<hr>
+<!-- Adicionado Filtro -->
+<div class="row">
+    <app-message-filter (filterChanged)="handleFilterChanged($event)"></app-message-filter>
+</div>
+<hr>
+<!-- /Filtro -->
+<div class="row">
+    <!-- Passar filtro para a lista -->
+    <app-message-list 
+        [filterCriteria]="currentFilter" 
+        (editClicked)="handleEditClicked($event)">
+    </app-message-list>
+</div>
+
